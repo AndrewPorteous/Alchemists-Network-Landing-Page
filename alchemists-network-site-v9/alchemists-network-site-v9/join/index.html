@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Joining | Alchemists Network</title>
+  <meta name="description" content="Taking you to your Alchemists Network WhatsApp group.">
+  <meta name="theme-color" content="#5b16a8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--purple:#5b16a8;--violet:#8a2be2;--ink:#241633;--muted:#685d71;--soft:#f7f1ff;--border:rgba(91,22,168,.14)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff 0%,var(--soft) 100%);line-height:1.65;min-height:100vh}
+    a{color:var(--purple)}
+    header{border-bottom:1px solid var(--border);background:#fff}
+    .bar{width:min(calc(100% - 32px),760px);margin:0 auto;display:flex;align-items:center;height:72px}
+    .bar a{text-decoration:none;color:var(--ink);font-weight:800;display:flex;align-items:center;gap:10px}
+    .bar img{height:44px;width:auto}
+    main{width:min(calc(100% - 32px),680px);margin:40px auto 56px;background:#fff;border:1px solid var(--border);border-radius:24px;padding:36px;box-shadow:0 18px 50px rgba(55,22,85,.08)}
+    h1{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(2rem,5vw,2.7rem);line-height:1.1;margin:0 0 10px;color:var(--purple)}
+    p{margin:0 0 12px}
+    .muted{color:var(--muted)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:13px 24px;border-radius:14px;background:var(--purple);color:#fff;font-weight:800;text-decoration:none}
+    .btn:hover{background:var(--violet)}
+    iframe{display:block;width:100%;min-height:820px;border:0;border-radius:14px;margin-top:8px}
+    footer{text-align:center;color:var(--muted);font-size:.9rem;padding:0 16px 40px}
+    @media(max-width:600px){main{padding:24px 16px;margin:24px auto 40px;border-radius:20px}iframe{min-height:900px}}
+    .legal-page{width:min(calc(100% - 32px),860px)}
+    .legal-page h2{font-size:1.15rem;margin:28px 0 8px}
+    footer a{margin:0 2px}
+  </style>
+  <script src="/js/config.js"></script>
+  <script>if (!window.ALCHEMISTS_CONFIG) document.write('<script src="../js/config.js"><\/script>');</script>
+  
+</head>
+<body>
+<header><div class="bar"><a href="/"><img src="/assets/logos/alchemists-network-header.webp" alt="" width="54" height="44"><span>Alchemists Network</span></a></div></header>
+<main style="text-align:center">
+  <h1 id="t">Thank you!</h1>
+  <p class="muted" id="m">We're taking you to your WhatsApp group now&hellip;</p>
+  <p><a class="btn" id="go" href="/">Open the WhatsApp group</a></p>
+  <p class="muted" style="font-size:.95rem;margin-top:18px">If WhatsApp doesn't open by itself, tap the button above.<br>We've also emailed you the link, so you can join later.</p>
+</main>
+<script>
+(function () {
+  // If GoHighLevel opened this page inside the form box, move it to the full window.
+  try { if (window.top !== window.self) { window.top.location.href = window.location.href; return; } } catch (e) {}
+
+  var cfg = window.ALCHEMISTS_CONFIG || {};
+  var links = cfg.whatsapp || {};
+  var labels = cfg.interests || {};
+
+  // Which group? 1) ?interest= in the address, 2) the card clicked on the home page, 3) General.
+  var key = (new URLSearchParams(window.location.search).get('interest') || '').toLowerCase();
+  if (!links[key]) { try { key = localStorage.getItem('an_interest') || ''; } catch (e) {} }
+  if (!links[key]) { try { key = sessionStorage.getItem('an_interest') || ''; } catch (e) {} }
+  if (!links[key]) key = 'general';
+
+  var url = links[key];
+  var name = labels[key] || 'General';
+  document.getElementById('t').textContent = 'Welcome to ' + name + '!';
+  document.getElementById('m').textContent = "We're taking you to the " + name + ' WhatsApp group now\u2026';
+  var go = document.getElementById('go');
+  go.href = url;
+  go.textContent = 'Open the ' + name + ' WhatsApp group';
+  setTimeout(function () { window.location.href = url; }, 1500);
+})();
+</script>
+<footer>&copy; <span id="y"></span> Alchemists Network &middot; <a href="/privacy/">Privacy</a> &middot; <a href="/terms/">Terms</a> &middot; <a href="/legal-notice/">Legal notice</a> &middot; <a href="/">Home</a></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>
