@@ -1290,8 +1290,13 @@
     if (/[?&]registered=1(&|$)/.test(location.search)) {
       if (window.top !== window.self) { try { window.top.location.href = location.href; } catch (e) {} }
       else {
-        var wsRow = document.querySelector('[data-ok-ws]'); if (wsRow && wsRow.closest('li')) wsRow.closest('li').hidden = true;
+        var wsRow = document.querySelector('[data-ok-ws]'); if (wsRow && wsRow.closest('li')) { wsRow.closest('li').hidden = true; wsRow.closest('li').style.display = 'none'; }
         showSuccess();
+        // Land on the success card once the page has finished laying out (clear of the sticky header)
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        var goOk = function(){ var okEl = document.getElementById('reg-success'); if (!okEl) return; var y = okEl.getBoundingClientRect().top + window.pageYOffset - 90; window.scrollTo(0, Math.max(0, y)); };
+        setTimeout(goOk, 60);
+        window.addEventListener('load', function(){ setTimeout(goOk, 120); });
       }
     }
     // Remember the link's source tags for the registration (kept for the visit, even after scrolling)
