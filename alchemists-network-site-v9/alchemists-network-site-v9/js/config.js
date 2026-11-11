@@ -7,7 +7,7 @@ window.ALCHEMISTS_CONFIG = {
 
   // GoHighLevel "Update your details" form for existing WhatsApp members
   // (page alchemistsnetwork.com/update). Paste ONLY its Form ID.
-  ghlUpdateFormId: 'PASTE_GHL_UPDATE_FORM_ID_HERE',
+  ghlUpdateFormId: 'j9ZvssV6mkTIa8kKCvu7',
   ghlFormBaseUrl: 'https://api.leadconnectorhq.com/widget/form/',
 
   // Names sent to GoHighLevel. They must match the options of the

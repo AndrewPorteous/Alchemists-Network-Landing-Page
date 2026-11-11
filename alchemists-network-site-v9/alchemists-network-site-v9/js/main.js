@@ -18,8 +18,10 @@
   // 1. Remember where the visitor came from (tracking links, SOP Chapter 8).
   const params = new URLSearchParams(window.location.search);
   TRACK_KEYS.forEach((k) => {
-    const v = params.get(k);
-    if (v) session.set('an_' + k, v.toLowerCase().trim());
+    // ?referred_by= is accepted as another name for ?ref=
+    const v = params.get(k) || (k === 'ref' ? params.get('referred_by') : null);
+    // Referral codes keep their capitals (AN12345); UTM values are lowercased
+    if (v) session.set('an_' + k, k === 'ref' ? v.trim() : v.toLowerCase().trim());
   });
 
   // 2. Plain WhatsApp links (used only as a fallback or on other pages).
@@ -101,7 +103,8 @@
     }
     TRACK_KEYS.forEach((k) => {
       const v = session.get('an_' + k);
-      if (v) url.searchParams.set(k, v);
+      // The GHL form's hidden Referred By field listens for referred_by, not ref
+      if (v) url.searchParams.set(k === 'ref' ? 'referred_by' : k, v);
     });
     return url.toString();
   };

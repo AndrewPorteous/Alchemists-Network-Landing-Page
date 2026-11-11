@@ -316,3 +316,32 @@ h3{font-size:clamp(1.45rem,3vw + .5rem,2.25rem)}
 .interest-card{min-height:48px}
 /* Footer without tagline */
 .footer-brand img{height:auto}
+
+/* ===== v9.1: Safari and mobile fixes ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:108px}
+.site-header{-webkit-backdrop-filter:blur(16px)}
+/* Browsers give <figure> a default 40px side margin. Safari also adds it to the photo height. */
+figure{margin:0}
+/* Safari let the loaded photo stretch its column and pushed the hero text off screen */
+.hero-grid>*,.inside-grid>*{min-width:0}
+.hero-photo,.inside-photo{position:relative;width:100%}
+.hero-photo img,.inside-photo img{position:absolute;top:0;left:0}
+/* Dialog: fit the visible screen when the iPhone toolbar is showing; open with no focus ring on the close button */
+.join-dialog-card{max-height:88dvh;overscroll-behavior:contain}
+.join-dialog-card:focus{outline:none}
+/* Touch screens: hover effects must not stay stuck after a tap */
+@media(hover:none){
+  .btn:hover,.btn-primary:hover,.btn-secondary:hover,.final-cta .btn-secondary:hover,.interest-card:hover,.site-nav a:not(.btn):hover,.free-note:hover{transform:none}
+}
+@media(max-width:900px){
+  html{scroll-padding-top:92px}
+  .hero-grid,.inside-grid{grid-template-columns:minmax(0,1fr)}
+  /* Long menu stays reachable on phones held sideways */
+  .site-nav{max-height:calc(100vh - 92px);max-height:calc(100dvh - 92px);overflow-y:auto}
+}
+@media(max-width:600px){
+  html{scroll-padding-top:82px}
+  .interest-logo{min-width:118px}
+  .join-dialog-card{max-height:92dvh}
+  .site-nav{max-height:calc(100vh - 82px);max-height:calc(100dvh - 82px)}
+}
