@@ -1030,6 +1030,8 @@
 
   (function(){
     if (!GHL_FORM_ID) return;
+    // After registering (?registered=1) don't draw a fresh empty form above the success card
+    if (/[?&]registered=1(&|$)/.test(location.search) && window.top === window.self) return;
     var frame = document.getElementById('ghl-frame');
     var id = 'inline-' + GHL_FORM_ID;
     frame.id = id;
